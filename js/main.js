@@ -1,12 +1,8 @@
 /**
  * 
  */
-function resource(name, amount){
-	
-	this.name;
-	this.amount;
-	this.unlocked = false;
-}
+
+
 
 
 $(function(){
@@ -18,21 +14,45 @@ $(function(){
 });
 
 var Game = {
-	resources: [],
+	resources: {},
 	energy: {},
 	production: {},
 	buildings: {},
 	ui: {},
 	init: function(){
-		var iron = new resource();
-		iron.name = "iron";
-		iron.amount = 0;
-		iron.unlocked = true;
-		Game.resources.push(iron);
+		Game.resources = reslist;
+		Game.resources.wood.unlocked = true;
 		
 		Game.ui.init();
 		
 		console.log("Game init done");
+	}
+}
+
+Game.resources ={
+	list: {},
+	init: function(){
+		this.list = reslist;
+	},
+	unlock: function(name){
+		if(this.isUnlocked(name)){
+			this.list[name].unlocked = true;
+			return true;
+		}
+		return false;
+	},
+	add: function(name, amount){
+		if(this.isUnlocked(name)){
+			this.list[name].amount += amount;
+			return true;
+		}
+		return false;
+	},
+	isUnlocked: function(name){
+		if(this.list.indexOf(name) > 0){
+			return this.list[name].unlocked;
+		}
+		return false;
 	}
 };
 
