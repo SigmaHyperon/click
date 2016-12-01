@@ -20,9 +20,7 @@ var Game = {
 	buildings: {},
 	ui: {},
 	init: function(){
-		Game.resources = reslist;
-		Game.resources.wood.unlocked = true;
-		
+		Game.resources.init();
 		Game.ui.init();
 		
 		console.log("Game init done");
@@ -33,6 +31,7 @@ Game.resources ={
 	list: {},
 	init: function(){
 		this.list = reslist;
+		this.unlock("wood");
 	},
 	unlock: function(name){
 		if(this.isUnlocked(name)){
