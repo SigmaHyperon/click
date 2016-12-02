@@ -2,14 +2,12 @@
  * 
  */
 
-
-
-
 $(function(){
 	$(".game .menu .btn").on("click", function(e){
 		$(".game .content .content-tab").hide();
 		$(".game .content .content-tab#"+$(this).attr("name")).show();
 	});
+	$(".game .content .content-tab#main").show();
 	Game.init();
 });
 
@@ -18,9 +16,12 @@ var Game = {
 	energy: {},
 	production: {},
 	buildings: {},
+	research: {},
 	ui: {},
 	init: function(){
+		Game.research.init();
 		Game.resources.init();
+		Game.buildings.init();
 		Game.ui.init();
 		
 		console.log("Game init done");
@@ -30,11 +31,10 @@ var Game = {
 Game.resources ={
 	list: {},
 	init: function(){
-		this.list = reslist;
-		this.unlock("wood");
+		this.list = new resourceList();
 	},
 	unlock: function(name){
-		if(this.isUnlocked(name)){
+		if(!this.isUnlocked(name)){
 			this.list[name].unlocked = true;
 			return true;
 		}
@@ -48,7 +48,7 @@ Game.resources ={
 		return false;
 	},
 	isUnlocked: function(name){
-		if(this.list.indexOf(name) > 0){
+		if(typeof this.list[name] != "undefined"){
 			return this.list[name].unlocked;
 		}
 		return false;
@@ -66,9 +66,9 @@ Game.ui.resources = {
 	},
 	update: function(){
 		this.clear();
-		for(item in Game.resources){
-			if(Game.resources[item].unlocked){
-				this.addRecord(Game.resources[item].name, Game.resources[item].amount);
+		for(item in Game.resources.list){
+			if(Game.resources.list[item].unlocked){
+				this.addRecord(Game.resources.list[item].name, Game.resources.list[item].amount);
 			}
 		}
 	},
@@ -79,3 +79,14 @@ Game.ui.resources = {
 		$(this.table).children().remove();
 	}
 };
+
+Game.research = {
+	init: function(){
+		this.list = researchList;
+	},
+};
+Game.buildings = {
+	init: function(){
+		this.list = buildingList;
+	},
+}

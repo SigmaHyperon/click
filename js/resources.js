@@ -1,7 +1,7 @@
 function resource(name, amount){
 	this.name;
 	this.amount;
-	this.unlocked = true;
+	this.unlocked = false;
 	if(typeof name != "undefined"){
 		this.name = name;
 		if(typeof amount != "undefined"){
@@ -13,14 +13,14 @@ function resource(name, amount){
 	}
 };
 
-var reslist = {
-		wood: new resource("wood"),
-		copper: new resource("copper"),
-		bronze: new resource("bronze"),
-		steel: new resource("steel"),
-		aluminium: new resource("aluminium"),
-		oil: new resource("oil"),
-		plastics: new resource("plastics"),
-		cFiber: new resource("carbon fiber"),
-		nMaterials: new resource("nano materials")
+var resourceList = function(){
+		this.wood = new resource("wood");
+		this.copper = new resource("copper");
+		this.bronze = new resource("bronze");
+		this.steel = new resource("steel");
+		this.aluminium = new resource("aluminium");
+		this.oil = new resource("oil");
+		this.plastics = new resource("plastics");
+		this.cFiber = new resource("carbon fiber");
+		this.nMaterials = new resource("nano materials");
 };

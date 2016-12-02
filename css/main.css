@@ -54,6 +54,11 @@ body {
 }
 
 .game .content .content-tab {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 201px;
 	display: none;
 	height: 100%;
 	width: -webkit-calc(100% - 201px);
@@ -75,6 +80,13 @@ body {
 
 .game .content .sidebar table#resources tr td:NTH-CHILD(2) {
 	text-align: right;
+}
+
+.game .content .content-tab .research-category {
+	width: 20%;
+	height: 100%;
+	border-right: 1px solid black;
+	float: left;
 }
 
 
