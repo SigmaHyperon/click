@@ -5,7 +5,7 @@
 $(function(){
 	$(".game .menu .btn").on("click", function(e){
 		$(".game .content .content-tab").hide();
-		$(".game .content .content-tab#"+$(this).attr("name")).show();
+		$(".game .content .content-tab#"+$(this).attr("id")).show();
 	});
 	$(".game .content .content-tab#main").show();
 	Game.init();
