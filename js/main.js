@@ -3,11 +3,6 @@
  */
 
 $(function(){
-	$(".game .menu .btn").on("click", function(e){
-		$(".game .content .content-tab").hide();
-		$(".game .content .content-tab#"+$(this).attr("id")).show();
-	});
-	$(".game .content .content-tab#main").show();
 	Game.init();
 });
 
@@ -57,6 +52,8 @@ Game.resources ={
 
 Game.ui.init = function(){
 	Game.ui.resources.init();
+	Game.ui.buildings.init();
+	Game.ui.menu.init();
 };
 
 Game.ui.resources = {
@@ -78,6 +75,32 @@ Game.ui.resources = {
 	clear: function(){
 		$(this.table).children().remove();
 	}
+};
+
+Game.ui.buildings = {
+	template: function(newBuilding){
+		return "<div class='btn'>"+newBuilding.name+"</div>";
+	},
+	init: function(){
+		this.tab = $(".game .content .content-tab#buildings");
+		this.update();
+	},
+	update: function(){
+		$(this.tab).children().remove();
+		for(id in Game.buildings.list){
+			$(this.tab).append(this.template(Game.buildings.list[id]));
+		};
+	}
+};
+
+Game.ui.menu = {
+	init: function(){
+		$(".game .menu .btn").on("click", function(e){
+			$(".game .content .content-tab").hide();
+			$(".game .content .content-tab#"+$(this).attr("id")).show();
+		});
+		$(".game .content .content-tab#main").show();
+	},
 };
 
 Game.research = {
